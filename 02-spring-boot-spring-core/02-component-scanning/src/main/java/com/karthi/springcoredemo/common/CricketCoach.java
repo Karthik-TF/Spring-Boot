@@ -1,4 +1,4 @@
-package com.karthi.util;
+package com.karthi.springcoredemo.common;
 
 import org.springframework.stereotype.Component;
 
