@@ -1,5 +1,6 @@
 package com.karthi.cruddemo;
 
+import org.hibernate.event.spi.SaveOrUpdateEvent;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,8 +19,29 @@ public class CruddemoApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
 		return runner ->{
-			createStudent(studentDAO);
+			//createStudent(studentDAO);
+			createMultipleStudents(studentDAO);
 		};
+	}
+	
+
+	private void createMultipleStudents(StudentDAO studentDAO) {
+		// TODO Auto-generated method stub
+		//create obj
+		System.out.println("Creating new Student object...");
+		Student tempStudent1 = new Student("shiba","s","shiba@123.com");
+		Student tempStudent2 = new Student("jaga","T","jaga@123.com");
+		Student tempStudent3 = new Student("charan","m,","charan@123.com");
+		
+		//Save them
+		System.out.println("Saving the student...");
+		studentDAO.save(tempStudent1);
+		studentDAO.save(tempStudent2);
+		studentDAO.save(tempStudent3);
+		//display id's
+		System.out.println("saved student. Generated id: "+ tempStudent1.getId());
+		System.out.println("saved student. Generated id: "+ tempStudent2.getId());
+		System.out.println("saved student. Generated id: "+ tempStudent3.getId());
 	}
 
 	private void createStudent(StudentDAO studentDAO) {
