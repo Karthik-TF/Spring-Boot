@@ -26,7 +26,7 @@ public class StudentDAOImpl implements StudentDAO{
 	}
 	//implement save method
 
-	@Override
+	@Override	
 	@Transactional
 	public void save(Student theStudent) {
 		entityManager.persist(theStudent);
@@ -45,6 +45,18 @@ public class StudentDAOImpl implements StudentDAO{
 		//create query
 		TypedQuery<Student> theQuery = entityManager.createQuery("FROM Student", Student.class);
 		//return query result
+		return theQuery.getResultList();
+	}
+
+	@Override
+	public List<Student> findByLastName(String theLastName) {
+		//create query 
+		TypedQuery<Student> theQuery = entityManager.createQuery(
+				"FROM Student WHERE lastName=:theData",Student.class);
+		//set query parameters
+		theQuery.setParameter("theData", theLastName);
+		
+		//return query results
 		return theQuery.getResultList();
 	}
 
