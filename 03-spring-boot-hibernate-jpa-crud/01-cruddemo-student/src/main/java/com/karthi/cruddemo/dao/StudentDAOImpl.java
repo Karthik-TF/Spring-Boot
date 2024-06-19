@@ -32,6 +32,12 @@ public class StudentDAOImpl implements StudentDAO{
 		
 	}
 
+	@Override
+	public Student findById(Integer id) {
+		// TODO Auto-generated method stub
+		return entityManager.find(Student.class, id);
+	}
+
 	
 
 }
