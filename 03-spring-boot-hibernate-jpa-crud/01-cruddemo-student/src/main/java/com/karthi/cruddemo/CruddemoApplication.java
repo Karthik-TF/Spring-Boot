@@ -1,5 +1,7 @@
 package com.karthi.cruddemo;
 
+import java.util.List;
+
 import org.hibernate.event.spi.SaveOrUpdateEvent;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -21,10 +23,21 @@ public class CruddemoApplication {
 		return runner ->{
 			//createStudent(studentDAO);
 			//createMultipleStudents(studentDAO);
-			readStudent(studentDAO);
+			//readStudent(studentDAO);
+			queryForStudents(studentDAO);
 		};
 	}
 	
+
+	private void queryForStudents(StudentDAO studentDAO) {
+		// get list of students
+		List<Student> theStudents = studentDAO.findAll();
+		//display the list of students
+		for(Student tempStudent:theStudents) {
+				System.out.println(tempStudent);
+		}
+		
+	}
 
 	private void readStudent(StudentDAO studentDAO) {
 		// TODO Auto-generated method stub
