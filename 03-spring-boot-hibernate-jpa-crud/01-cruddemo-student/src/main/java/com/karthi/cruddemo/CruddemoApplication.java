@@ -26,10 +26,18 @@ public class CruddemoApplication {
 			//readStudent(studentDAO);
 			//queryForStudents(studentDAO);
 			//queryForStudentsByLastName(studentDAO);
-			updateStudent(studentDAO);
+			//updateStudent(studentDAO);
+			deleteStudent(studentDAO);
 		};
 	}
 	
+
+	private void deleteStudent(StudentDAO studentDAO) {
+		// delete the student
+		int studentId = 3;
+		System.out.println("Deleting student id: "+studentId);
+		studentDAO.delete(studentId);
+	}
 
 	private void updateStudent(StudentDAO studentDAO) {
 		// retrieve student based on the id: primary key
@@ -69,16 +77,17 @@ public class CruddemoApplication {
 	private void readStudent(StudentDAO studentDAO) {
 		// TODO Auto-generated method stub
 		//create a student object
-		System.out.println("Creating new student object...");
+	/*	System.out.println("Creating new student object...");
 		Student tempStudent = new Student("karl", "jacob", "karl@123.com");
 		
 		//save the student object
 		System.out.println("Saving the student object...");
 		studentDAO.save(tempStudent);
-		
+		*/
 		//display the saved student id
-		int theId= tempStudent.getId();
-		System.out.println("Saved student. Generated id: " + theId);
+//		int theId= tempStudent.getId();
+		int theId= 2;
+	//	System.out.println("Saved student. Generated id: " + theId);
 		
 		//retrieve student based on the id: primary key
 		System.out.println("Retrieving student with id:  "+theId);
@@ -93,19 +102,22 @@ public class CruddemoApplication {
 		// TODO Auto-generated method stub
 		//create obj
 		System.out.println("Creating new Student object...");
-		Student tempStudent1 = new Student("shiba","s","shiba@123.com");
+		Student tempStudent1 = new Student("shiba","k","shiba@123.com");
 		Student tempStudent2 = new Student("jaga","T","jaga@123.com");
-		Student tempStudent3 = new Student("charan","m,","charan@123.com");
+		Student tempStudent3 = new Student("charan","m","charan@123.com");
+		Student tempStudent4 = new Student("karl", "jacob", "karl@123.com");
 		
 		//Save them
 		System.out.println("Saving the student...");
 		studentDAO.save(tempStudent1);
 		studentDAO.save(tempStudent2);
 		studentDAO.save(tempStudent3);
+		studentDAO.save(tempStudent4);
 		//display id's
 		System.out.println("saved student. Generated id: "+ tempStudent1.getId());
 		System.out.println("saved student. Generated id: "+ tempStudent2.getId());
 		System.out.println("saved student. Generated id: "+ tempStudent3.getId());
+		System.out.println("saved student. Generated id: "+ tempStudent4.getId());
 	}
 
 	private void createStudent(StudentDAO studentDAO) {
