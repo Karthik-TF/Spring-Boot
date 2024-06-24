@@ -9,19 +9,28 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.karthi.demo.entity.Student;
 
+import jakarta.annotation.PostConstruct;
+
 @RestController
 @RequestMapping("/api")
 public class StudentRestController {
 	
-	//define endpoint for /students
-	@GetMapping("/students")
-	public List<Student> getStudents(){
-		List<Student> theStudents = new ArrayList<>();
+	private List<Student> theStudents;
+	
+	//using postconstruct to load the student data only once..
+	@PostConstruct
+	public void loadData() {
+		theStudents = new ArrayList<>();
 		
 		theStudents.add(new Student("karthi", "suresh"));
 		theStudents.add(new Student("charan", "malloth"));
 		theStudents.add(new Student("tony", "stark"));
 		
+	}
+	
+	//define endpoint for /students
+	@GetMapping("/students")
+	public List<Student> getStudents(){
 		return theStudents;
 	}
 
