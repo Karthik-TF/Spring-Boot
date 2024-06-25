@@ -2,6 +2,7 @@ package com.karthi.springboot.cruddemo.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,13 +55,25 @@ public class EmployeeRestController {
 	//put mapping for updating an already exist employee in db
 	@PutMapping("/employees")
 	public Employee updatEmployee(@RequestBody Employee theEmployee) {
+		//i implemented the following to restrict saving a new employee 
 		int rowId = theEmployee.getId();
 		Employee db2Employee = employeeService.findById(rowId);
 		if(db2Employee==null) {
 			throw new RuntimeException("Employee id not found - "+rowId);
 		}
+		//updating a employee
 		Employee dbEmployee = employeeService.save(theEmployee);
 		return dbEmployee;
+	}
+	//Delete mapping for "/employees/{employeeId}"
+	@DeleteMapping("/employees/{employeeId}")
+	public String deleteEmployees(@PathVariable int employeeId) {
+		Employee theEmployee = employeeService.findById(employeeId);
+		if(theEmployee==null) {
+			throw new RuntimeException("Employee id not found - "+employeeId);
+		}
+		employeeService.deleteById(employeeId);
+		return "Deleted employee id - "+employeeId;
 	}
 
 	
