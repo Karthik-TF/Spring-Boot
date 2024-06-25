@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.karthi.springboot.cruddemo.entity.Employee;
 import com.karthi.springboot.cruddemo.service.EmployeeService;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @RestController
 @RequestMapping("/api")
@@ -35,6 +38,16 @@ public class EmployeeRestController {
 			throw new RuntimeException("Employee id not found - "+employeeId);
 		}
 		return theEmployee;
+	}
+	
+	//post mapping for add new employee
+	@PostMapping("/employees")
+	public Employee addEmployee(@RequestBody Employee theEmployee) {
+		//also just in case if they pass id in JSON set it to 0
+		//this is to force to save a new item instead of update
+		theEmployee.setId(0);
+		Employee dbEmployee = employeeService.save(theEmployee);
+		return dbEmployee;
 	}
 	
 
