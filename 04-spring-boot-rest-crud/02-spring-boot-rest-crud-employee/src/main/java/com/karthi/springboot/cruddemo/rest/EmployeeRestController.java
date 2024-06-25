@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.karthi.springboot.cruddemo.entity.Employee;
 import com.karthi.springboot.cruddemo.service.EmployeeService;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
@@ -50,5 +51,20 @@ public class EmployeeRestController {
 		return dbEmployee;
 	}
 	
+	//put mapping for updating an already exist employee in db
+	@PutMapping("/employees")
+	public Employee updatEmployee(@RequestBody Employee theEmployee) {
+		int rowId = theEmployee.getId();
+		Employee db2Employee = employeeService.findById(rowId);
+		if(db2Employee==null) {
+			throw new RuntimeException("Employee id not found - "+rowId);
+		}
+		Employee dbEmployee = employeeService.save(theEmployee);
+		return dbEmployee;
+	}
 
+	
+	
+	
+	
 }
