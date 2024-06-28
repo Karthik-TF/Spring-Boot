@@ -15,8 +15,11 @@ public class Employee {
 	@Column(name="id")
 	private int id;
 	
-	@Column(name = "name")
-	private String name;
+	@Column(name = "firstname")
+	private String firstName;
+	
+	@Column(name = "lastname")
+	private String lastName;
 	
 	@Column(name = "email")
 	private String email;
@@ -25,9 +28,10 @@ public class Employee {
 		
 	}
 
-	public Employee(String name, String email) {
+	public Employee(String firstName, String lastName, String email) {
 		super();
-		this.name = name;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.email = email;
 	}
 
@@ -39,12 +43,20 @@ public class Employee {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public String getEmail() {
@@ -57,9 +69,8 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", name=" + name + ", email=" + email + "]";
+		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + "]";
 	}
-	
-	//
 
+	
 }
